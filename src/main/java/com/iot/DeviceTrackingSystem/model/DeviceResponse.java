@@ -1,8 +1,5 @@
 package com.iot.DeviceTrackingSystem.model;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-
 public class DeviceResponse {
 
     private long id;

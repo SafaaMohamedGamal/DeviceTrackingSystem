@@ -15,6 +15,7 @@ temprature int,
 status_id int
 );
 ALTER TABLE device ADD PRIMARY KEY (id);
+ALTER TABLE device ADD constraint U_pin_code UNIQUE device(pin_code);
 
 create table status
 (
@@ -42,9 +43,7 @@ insert into device values (9,'1117773', -1, 1);
 insert into device values (10,'2227773', 2, 2);
 insert into device values (11,'1118883', -1, 1);
 commit;
-update sequence
-set seq_value = 12
-where seq_name='device_id';
+
+insert into sequence values (1,'device_id', 12);
 commit;
 
-----------------------------unique constraint

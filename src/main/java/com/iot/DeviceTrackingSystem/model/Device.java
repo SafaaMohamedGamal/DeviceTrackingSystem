@@ -37,7 +37,7 @@ public class Device implements Serializable {
 	@Column(name = "status_id")
 	private int statusId = 1;
 
-	@Column(unique = true)
+	@Column(unique = true, length = 7)
 	private String pinCode;
 	
 	@Transient
