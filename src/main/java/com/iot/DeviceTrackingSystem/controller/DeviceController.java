@@ -47,7 +47,7 @@ public class DeviceController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Response> updateDevice(@RequestBody DeviceDto deviceDto, @PathVariable(name = "id") long id) {
+	public ResponseEntity<Response> updateDevice(@Valid @RequestBody DeviceDto deviceDto, @PathVariable(name = "id") long id) {
 		Response response;
 		HttpStatus status;
 		try {

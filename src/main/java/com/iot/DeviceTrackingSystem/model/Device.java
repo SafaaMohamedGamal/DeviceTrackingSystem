@@ -13,7 +13,14 @@ import javax.persistence.TableGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+//import lombok.AllArgsConstructor;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+
 @Entity(name = "device")
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class Device implements Serializable {
 
 	/**
@@ -21,6 +28,18 @@ public class Device implements Serializable {
 	 */
 	private static final long serialVersionUID = -5495824783659595151L;
 
+
+	public Device() {
+		super();
+	}
+
+	public Device(long id, int temprature, String pinCode, Status status) {
+		super();
+		this.id = id;
+		this.temprature = temprature;
+		this.pinCode = pinCode;
+		this.status = status;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "device_id")

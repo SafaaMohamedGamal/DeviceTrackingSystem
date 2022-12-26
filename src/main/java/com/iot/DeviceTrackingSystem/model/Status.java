@@ -13,9 +13,11 @@ public class Status implements Serializable, Cloneable {
 
 	public Status() {
 	}
-	public Status(int id) {
+	
+	public Status(int id, String name) {
 		super();
 		this.id = id;
+		this.name = name;
 	}
 
 	@Id
