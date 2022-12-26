@@ -3,6 +3,7 @@ package com.iot.DeviceTrackingSystem.model;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class DeviceDto {
@@ -11,7 +12,10 @@ public class DeviceDto {
 	@Max(value = 10, message = "Device temprature must be between 0 to 10 C if configured and -1 if not")
 	private int temprature;
 
-	private int statusId;
+	@NotNull(message = "statusId is required")
+	@Min(value = 1, message = "Device status must be Ready(1) or Active(2)")
+	@Max(value = 2, message = "Device status must be Ready(1) or Active(2)")
+	private Integer statusId;
 
 	@NotBlank(message = "pincode is required")
     @Size(max = 7, message = "Device pinCode should have seven-digit characters")
@@ -25,11 +29,11 @@ public class DeviceDto {
 		this.temprature = temprature;
 	}
 
-	public int getStatusId() {
+	public Integer getStatusId() {
 		return statusId;
 	}
 
-	public void setStatusId(int statusId) {
+	public void setStatusId(Integer statusId) {
 		this.statusId = statusId;
 	}
 
