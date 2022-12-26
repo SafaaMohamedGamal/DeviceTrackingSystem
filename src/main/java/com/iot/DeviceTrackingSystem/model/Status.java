@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity(name = "status")
-public class Status implements Serializable {
+public class Status implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = -4448377296664511360L;
 

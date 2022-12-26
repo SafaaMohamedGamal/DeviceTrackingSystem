@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name = "device")
 public class Device implements Serializable {
 
@@ -30,18 +32,17 @@ public class Device implements Serializable {
 	@Column
 	private int temprature ;
 
+	@Column(unique = true, length = 7)
+	private String pinCode;
+	
 	@JoinColumn(name = "status_id")
 	@ManyToOne
 	private Status status;
 	
+	@JsonIgnore
 	@Column(name = "status_id", insertable = false, updatable = false)
 	private int statusId;
 
-	@Column(unique = true, length = 7)
-	private String pinCode;
-	
-	@Transient
-	private String statusName;
 
 	public long getId() {
 		return id;
@@ -73,11 +74,6 @@ public class Device implements Serializable {
 
 	public void setPinCode(String pinCode) {
 		this.pinCode = pinCode;
-	}
-
-	public String getStatusName() {
-		if(status!=null) return status.getName();
-		return "Ready";
 	}
 
 	public Status getStatus() {

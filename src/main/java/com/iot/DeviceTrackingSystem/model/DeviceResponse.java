@@ -6,9 +6,9 @@ public class DeviceResponse {
 
 	private int temprature;
 
-	private String statusName;
-
 	private String pinCode;
+
+	private Status status;
 
 	public long getId() {
 		return id;
@@ -26,12 +26,12 @@ public class DeviceResponse {
 		this.temprature = temprature;
 	}
 
-	public String getStatusName() {
-		return statusName;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setStatusName(String statusName) {
-		this.statusName = statusName;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	public String getPinCode() {
