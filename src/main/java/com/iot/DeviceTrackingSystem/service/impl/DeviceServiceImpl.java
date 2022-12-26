@@ -1,6 +1,7 @@
 package com.iot.DeviceTrackingSystem.service.impl;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
@@ -13,13 +14,21 @@ import com.iot.DeviceTrackingSystem.model.Device;
 import com.iot.DeviceTrackingSystem.model.DeviceDto;
 import com.iot.DeviceTrackingSystem.model.DeviceResponse;
 import com.iot.DeviceTrackingSystem.repository.DeviceRepository;
+import com.iot.DeviceTrackingSystem.repository.StatusRepository;
 import com.iot.DeviceTrackingSystem.service.DeviceService;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 @Service
 public class DeviceServiceImpl implements DeviceService {
 
 	@Autowired
 	private DeviceRepository deviceRepository;
+	@Autowired
+	private StatusRepository statusRepository;
 	
 
     public DeviceResponse createDevice(DeviceDto deviceDto) {
@@ -30,15 +39,22 @@ public class DeviceServiceImpl implements DeviceService {
     		throw new DeviceAPIException("Device with this pin-code already exists!", HttpStatus.BAD_REQUEST);
     	Device device = new Device();
     	BeanUtils.copyProperties(deviceDto, device);
-
+    	device.setStatus(statusRepository.getById(device.getStatusId()));
     	device = deviceRepository.save(device);
     	DeviceResponse createdDevice = new DeviceResponse();
     	BeanUtils.copyProperties(device, createdDevice);
     	return createdDevice;
     }
 
-    public List<DeviceResponse> getAllDevices(){
-    	List<Device> devices = deviceRepository.findAll();
+    public List<DeviceResponse> getAllDevices(int pageNo, int pageSize, String sortBy, String sortDir) {
+
+        Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+
+        Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
+
+        Page<Device> PageDevices= deviceRepository.findAll(pageable);
+    	List<Device> devices = PageDevices.getContent();
     	List<DeviceResponse> deviceResList = devices.stream().map(device -> {
     		DeviceResponse deviceRes = new DeviceResponse();
         	BeanUtils.copyProperties(device, deviceRes);
@@ -69,6 +85,7 @@ public class DeviceServiceImpl implements DeviceService {
     	if(deviceDto.getStatusId()==0) deviceDto.setStatusId(device.getStatusId());
     	
     	BeanUtils.copyProperties(deviceDto, device);
+    	device.setStatus(statusRepository.getById(device.getStatusId()));
     	device = deviceRepository.save(device);
     	DeviceResponse updatedDevice = new DeviceResponse();
     	BeanUtils.copyProperties(device, updatedDevice);
@@ -84,6 +101,20 @@ public class DeviceServiceImpl implements DeviceService {
 
     public void deleteAllDevices() {
     	deviceRepository.deleteAll();
+    }
+    
+    public DeviceResponse configureDevice(long id) {
+
+    	Device device = deviceRepository.findById(id).orElseThrow(() -> new DeviceAPIException("There isn't any device with id="+id, HttpStatus.BAD_REQUEST));
+    	if(device.getStatusId()==2)
+    		throw new DeviceAPIException("This device already configured", HttpStatus.BAD_REQUEST);
+    	Random random = new Random();
+    	device.setTemprature(random.nextInt(11));
+    	device.setStatus(statusRepository.getById(2));
+    	device = deviceRepository.save(device);
+    	DeviceResponse configuredDevice = new DeviceResponse();
+    	BeanUtils.copyProperties(device, configuredDevice);
+    	return configuredDevice;
     }
     
 }

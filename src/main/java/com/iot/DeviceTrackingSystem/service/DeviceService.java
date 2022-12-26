@@ -10,7 +10,7 @@ public interface DeviceService {
 
 	DeviceResponse createDevice(DeviceDto DeviceDto);
 
-    List<DeviceResponse>  getAllDevices();
+    public List<DeviceResponse> getAllDevices(int pageNo, int pageSize, String sortBy, String sortDir);
 
     DeviceResponse getDeviceById(long id);
 
@@ -19,4 +19,6 @@ public interface DeviceService {
     void deleteDeviceById(long id);
     
     void deleteAllDevices();
+    
+    DeviceResponse configureDevice(long id);
 }

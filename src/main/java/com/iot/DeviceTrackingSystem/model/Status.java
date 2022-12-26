@@ -10,7 +10,14 @@ import javax.persistence.Id;
 public class Status implements Serializable {
 
 	private static final long serialVersionUID = -4448377296664511360L;
-	
+
+	public Status() {
+	}
+	public Status(int id) {
+		super();
+		this.id = id;
+	}
+
 	@Id
 	private int id;
 	

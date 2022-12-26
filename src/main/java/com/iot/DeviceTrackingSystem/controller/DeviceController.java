@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iot.DeviceTrackingSystem.model.DeviceDto;
@@ -103,11 +104,16 @@ public class DeviceController {
 	}
 	
 	@GetMapping()
-	public ResponseEntity<Response>  getAllDevices() {
+	public ResponseEntity<Response>  getAllDevices(
+            @RequestParam(value = "pageNo", defaultValue = "1", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "5", required = false) int pageSize,
+            @RequestParam(value = "sortBy", defaultValue = "pinCode", required = false) String sortBy,
+            @RequestParam(value = "sortDir", defaultValue = "asc", required = false) String sortDir
+            ) {
 		Response response;
 		HttpStatus status;
 		try {
-			response = new Response(true, "Data found", deviceService.getAllDevices());
+			response = new Response(true, "Data found", deviceService.getAllDevices(pageNo, pageSize, sortBy, sortDir));
 			status = HttpStatus.OK;
 		}catch (Exception e) {
 			response = new Response(false, e.getMessage(), null);
@@ -116,4 +122,18 @@ public class DeviceController {
 		return new ResponseEntity<Response>(response, status);
 	}
 	
+
+	@PutMapping("/{id}/configuration")
+	public ResponseEntity<Response> configureDevice(@PathVariable(name = "id") long id) {
+		Response response;
+		HttpStatus status;
+		try {
+			response = new Response(true, "Device configured", deviceService.configureDevice(id));
+			status = HttpStatus.OK;
+		}catch (Exception e) {
+			response = new Response(false, e.getMessage(), null);
+			status = HttpStatus.BAD_REQUEST;
+		}
+		return new ResponseEntity<Response>(response, status);
+	}
 }

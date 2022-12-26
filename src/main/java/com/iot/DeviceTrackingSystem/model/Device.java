@@ -28,14 +28,14 @@ public class Device implements Serializable {
 	private long id;
 
 	@Column
-	private int temprature = -1;
+	private int temprature ;
 
-	@JoinColumn(name = "status_id", insertable = false, updatable = false)
+	@JoinColumn(name = "status_id")
 	@ManyToOne
 	private Status status;
 	
-	@Column(name = "status_id")
-	private int statusId = 1;
+	@Column(name = "status_id", insertable = false, updatable = false)
+	private int statusId;
 
 	@Column(unique = true, length = 7)
 	private String pinCode;
@@ -78,6 +78,14 @@ public class Device implements Serializable {
 	public String getStatusName() {
 		if(status!=null) return status.getName();
 		return "Ready";
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	
