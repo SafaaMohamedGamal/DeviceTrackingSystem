@@ -50,10 +50,10 @@ public class Device implements Serializable {
 	@Column
 	private int temprature ;
 
-	@Column(unique = true, length = 7)
+	@Column(unique = true, length = 7, nullable = false)
 	private String pinCode;
 	
-	@JoinColumn(name = "status_id")
+	@JoinColumn(name = "status_id",nullable = false)
 	@ManyToOne
 	private Status status;
 	

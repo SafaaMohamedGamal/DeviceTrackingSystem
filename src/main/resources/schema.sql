@@ -11,7 +11,7 @@ create table device
 id int not null,
 pin_code varchar(7),
 temprature int,
-status_id int
+status_id int not null
 );
 ALTER TABLE device ADD PRIMARY KEY (id);
 ALTER TABLE device ADD constraint U_PIN_CODE UNIQUE (pin_code);
