@@ -75,7 +75,7 @@ public class DeviceController {
 		return new ResponseEntity<Response>(response, status);
 	}
 	
-	@DeleteMapping("/")
+	@DeleteMapping
 	public ResponseEntity<Response>  deleteAllDevices() {
 		Response response;
 		HttpStatus status;

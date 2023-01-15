@@ -1,5 +1,7 @@
 package com.iot.DeviceTrackingSystem.model;
 
+import java.util.Objects;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -43,6 +45,20 @@ public class DeviceDto {
 
 	public void setPinCode(String pinCode) {
 		this.pinCode = pinCode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DeviceDto other = (DeviceDto) obj;
+		return Objects.equals(statusId, other.statusId)
+				&& Objects.equals(pinCode, other.pinCode)
+				&& Objects.equals(temprature, other.temprature);
 	}
 	
 	
