@@ -40,13 +40,9 @@ public class DeviceController {
 	public ResponseEntity<Response> createDevice(@Valid @RequestBody DeviceDto deviceDto) {
 		Response response;
 		HttpStatus status;
-		try {
+
 			response = new Response(true, "Device added successfully", deviceService.createDevice(deviceDto));
 			status = HttpStatus.CREATED;
-		}catch (Exception e) {
-			response = new Response(false, e.getMessage(), "");
-			status = HttpStatus.BAD_REQUEST;
-		}
 		return new ResponseEntity<Response>(response, status);
 	}
 	
@@ -54,13 +50,9 @@ public class DeviceController {
 	public ResponseEntity<Response> updateDevice(@Valid @RequestBody DeviceDto deviceDto, @PathVariable(name = "id") long id) {
 		Response response;
 		HttpStatus status;
-		try {
+
 			response = new Response(true, "Device updated successfully", deviceService.updateDevice(deviceDto, id));
 			status = HttpStatus.OK;
-		}catch (Exception e) {
-			response = new Response(false, e.getMessage(), "");
-			status = HttpStatus.BAD_REQUEST;
-		}
 		return new ResponseEntity<Response>(response, status);
 	}
 	
@@ -68,14 +60,10 @@ public class DeviceController {
 	public ResponseEntity<Response>  deleteDevice(@PathVariable(name = "id") long id) {
 		Response response;
 		HttpStatus status;
-		try{
+
 			deviceService.deleteDeviceById(id);
 			response = new Response(true, "Device deleted successfully", "");
 			status = HttpStatus.OK;
-		}catch (Exception e) {
-			response = new Response(false, e.getMessage(), "");
-			status = HttpStatus.BAD_REQUEST;
-		}
 		return new ResponseEntity<Response>(response, status);
 	}
 	
@@ -83,14 +71,10 @@ public class DeviceController {
 	public ResponseEntity<Response>  deleteAllDevices() {
 		Response response;
 		HttpStatus status;
-		try{
+
 			deviceService.deleteAllDevices();
 			response = new Response(true, "Devices deleted successfully", "");
 			status = HttpStatus.OK;
-		}catch (Exception e) {
-			response = new Response(false, e.getMessage(), "");
-			status = HttpStatus.BAD_REQUEST;
-		}
 		return new ResponseEntity<Response>(response, status);
 	}
 
@@ -98,13 +82,9 @@ public class DeviceController {
 	public ResponseEntity<Response>  getDevice(@PathVariable(name = "id") long id) {
 		Response response;
 		HttpStatus status;
-		try {
+
 			response = new Response(true, "Data found", deviceService.getDeviceById(id));
 			status = HttpStatus.OK;
-		}catch (Exception e) {
-			response = new Response(false, e.getMessage(), "");
-			status = HttpStatus.BAD_REQUEST;
-		}
 		return new ResponseEntity<Response>(response, status);
 	}
 	
@@ -115,14 +95,9 @@ public class DeviceController {
   	       Pageable pageable) {
 		Response response;
 		HttpStatus status;
-		try {
+		
 			response = new Response(true, "Data found", deviceService.getAllDevices(pageable));
 			status = HttpStatus.OK;
-		}catch (Exception e) {
-			response = new Response(false, e.getMessage(), "");
-			status = HttpStatus.BAD_REQUEST;
-			LOGGER.catching(e);
-		}
 		return new ResponseEntity<Response>(response, status);
 	}
 	
@@ -131,13 +106,9 @@ public class DeviceController {
 	public ResponseEntity<Response> configureDevice(@PathVariable(name = "id") long id) {
 		Response response;
 		HttpStatus status;
-		try {
 			response = new Response(true, "Device configured", deviceService.configureDevice(id));
 			status = HttpStatus.OK;
-		}catch (Exception e) {
-			response = new Response(false, e.getMessage(), "");
-			status = HttpStatus.BAD_REQUEST;
-		}
+
 		return new ResponseEntity<Response>(response, status);
 	}
 }
