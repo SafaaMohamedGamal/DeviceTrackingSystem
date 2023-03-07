@@ -2,6 +2,8 @@ package com.iot.DeviceTrackingSystem.controller;
 
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.iot.DeviceTrackingSystem.DeviceTrackingSystemApplication;
 import com.iot.DeviceTrackingSystem.model.DeviceDto;
 import com.iot.DeviceTrackingSystem.model.Response;
 import com.iot.DeviceTrackingSystem.service.DeviceService;
@@ -29,6 +32,7 @@ import com.iot.DeviceTrackingSystem.service.DeviceService;
 @RequestMapping(value = "/devices", produces = MediaType.APPLICATION_JSON_VALUE)
 public class DeviceController {
 
+    private static final Logger LOGGER = LogManager.getLogger(DeviceController.class);
 	@Autowired
 	private DeviceService deviceService;
 	
@@ -117,6 +121,7 @@ public class DeviceController {
 		}catch (Exception e) {
 			response = new Response(false, e.getMessage(), "");
 			status = HttpStatus.BAD_REQUEST;
+			LOGGER.catching(e);
 		}
 		return new ResponseEntity<Response>(response, status);
 	}
