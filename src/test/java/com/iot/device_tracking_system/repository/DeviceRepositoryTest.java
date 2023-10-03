@@ -1,4 +1,4 @@
-package com.iot.DeviceTrackingSystem.repository;
+package com.iot.device_tracking_system.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import com.iot.DeviceTrackingSystem.model.Device;
+import com.iot.device_tracking_system.entity.Device;
 
 @DataJpaTest()
 class DeviceRepositoryTest {
@@ -23,7 +23,7 @@ class DeviceRepositoryTest {
 	void addDeviceWithoutStatus_ThrowsIntegrityViolationException() {
 		Device device = new Device();
 		device.setPinCode("1111111");
-		device.setTemprature(1);
+		device.setTemperature(1);
 		assertThrows(DataIntegrityViolationException.class, () -> {
 			deviceRepository.save(device);
 	    });
@@ -33,11 +33,11 @@ class DeviceRepositoryTest {
 	void addDevice_shouldReturnDeviceWithCorrectStatus() {
 		Device device = new Device();
 		device.setPinCode("1111112");
-		device.setTemprature(1);
+		device.setTemperature(1);
 		device.setStatus(statusRepository.getById(1));
 		Device createdDevice = deviceRepository.save(device);
 		assertNotEquals(0, device.getId());
-		assertEquals(createdDevice.getTemprature(), device.getTemprature());
+		assertEquals(createdDevice.getTemperature(), device.getTemperature());
 		assertEquals("Ready", createdDevice.getStatus().getName());
 	}
 
@@ -46,13 +46,13 @@ class DeviceRepositoryTest {
 	void getDeviceById_shouldReturnSameAddedDevice() {
 		Device device = new Device();
 		device.setPinCode("1111113");
-		device.setTemprature(1);
+		device.setTemperature(1);
 		device.setStatus(statusRepository.getById(1));
 		Device createdDevice = deviceRepository.save(device);
 		Device returnedDevice = deviceRepository.getById(createdDevice.getId());
 		assertNotEquals(0, returnedDevice.getId());
 		assertEquals(returnedDevice.getPinCode(), device.getPinCode());
-		assertEquals(returnedDevice.getTemprature(), device.getTemprature());
+		assertEquals(returnedDevice.getTemperature(), device.getTemperature());
 		assertEquals("Ready", returnedDevice.getStatus().getName());
 	}
 	

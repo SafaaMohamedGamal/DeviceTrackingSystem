@@ -1,10 +1,10 @@
-package com.iot.DeviceTrackingSystem.model;
+package com.iot.device_tracking_system.model;
 
 public class DeviceResponse {
 
     private long id;
 
-	private int temprature;
+	private int temperature;
 
 	private String pinCode;
 
@@ -18,12 +18,12 @@ public class DeviceResponse {
 		this.id = id;
 	}
 
-	public int getTemprature() {
-		return temprature;
+	public int getTemperature() {
+		return temperature;
 	}
 
-	public void setTemprature(int temprature) {
-		this.temprature = temprature;
+	public void setTemperature(int temperature) {
+		this.temperature = temperature;
 	}
 
 	public Status getStatus() {

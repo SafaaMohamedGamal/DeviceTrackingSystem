@@ -1,4 +1,4 @@
-package com.iot.DeviceTrackingSystem.repository;
+package com.iot.device_tracking_system.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import com.iot.DeviceTrackingSystem.model.Status;
+import com.iot.device_tracking_system.model.Status;
 
 @DataJpaTest()
 class StatusRepositoryTest {

@@ -1,4 +1,4 @@
-package com.iot.DeviceTrackingSystem.exception;
+package com.iot.device_tracking_system.exception;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,17 +16,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.iot.DeviceTrackingSystem.controller.DeviceController;
-import com.iot.DeviceTrackingSystem.model.Response;
+import com.iot.device_tracking_system.controller.DeviceControllerImpl;
+import com.iot.device_tracking_system.model.Response;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private static final Logger LOGGER = LogManager.getLogger(DeviceController.class);
+    private static final Logger LOGGER = LogManager.getLogger(DeviceControllerImpl.class);
     
   @Override
   protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers,

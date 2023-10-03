@@ -1,4 +1,4 @@
-package com.iot.DeviceTrackingSystem.model;
+package com.iot.device_tracking_system.model;
 
 public class Response {
 

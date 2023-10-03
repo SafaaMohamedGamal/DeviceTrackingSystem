@@ -1,11 +1,11 @@
-package com.iot.DeviceTrackingSystem.service;
+package com.iot.device_tracking_system.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.iot.DeviceTrackingSystem.model.Device;
-import com.iot.DeviceTrackingSystem.model.DeviceDto;
-import com.iot.DeviceTrackingSystem.model.DeviceResponse;
+import com.iot.device_tracking_system.entity.Device;
+import com.iot.device_tracking_system.model.DeviceDto;
+import com.iot.device_tracking_system.model.DeviceResponse;
 
 public interface DeviceService {
 

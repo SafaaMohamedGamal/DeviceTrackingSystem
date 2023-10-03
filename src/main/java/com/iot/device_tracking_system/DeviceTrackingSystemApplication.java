@@ -1,4 +1,4 @@
-package com.iot.DeviceTrackingSystem;
+package com.iot.device_tracking_system;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

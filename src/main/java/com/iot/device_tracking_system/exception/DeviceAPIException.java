@@ -1,4 +1,4 @@
-package com.iot.DeviceTrackingSystem.exception;
+package com.iot.device_tracking_system.exception;
 
 import org.springframework.http.HttpStatus;
 

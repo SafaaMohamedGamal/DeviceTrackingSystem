@@ -1,18 +1,21 @@
-package com.iot.DeviceTrackingSystem.model;
+package com.iot.device_tracking_system.model;
 
-import java.io.Serializable;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity(name = "status")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Status implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = -4448377296664511360L;
-
-	public Status() {
-	}
 	
 	public Status(int id, String name) {
 		super();
@@ -25,23 +28,6 @@ public class Status implements Serializable, Cloneable {
 	
 	@Column
 	private String name;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	
 	
 
 }

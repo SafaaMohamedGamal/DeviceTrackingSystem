@@ -10,7 +10,7 @@ create table device
 (
 id int not null,
 pin_code varchar(7),
-temprature int,
+temperature int,
 status_id int not null
 );
 ALTER TABLE device ADD PRIMARY KEY (id);

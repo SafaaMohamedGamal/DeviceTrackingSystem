@@ -1,4 +1,4 @@
-package com.iot.DeviceTrackingSystem.model;
+package com.iot.device_tracking_system.entity;
 
 import java.io.Serializable;
 
@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.TableGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.iot.device_tracking_system.model.Status;
 
 //import lombok.AllArgsConstructor;
 //import lombok.Data;
@@ -33,10 +34,17 @@ public class Device implements Serializable {
 		super();
 	}
 
-	public Device(long id, int temprature, String pinCode, Status status) {
+	public Device(long id, int temperature, String pinCode, Status status) {
 		super();
 		this.id = id;
-		this.temprature = temprature;
+		this.temperature = temperature;
+		this.pinCode = pinCode;
+		this.status = status;
+	}
+
+	public Device(int temperature, String pinCode, Status status) {
+		super();
+		this.temperature = temperature;
 		this.pinCode = pinCode;
 		this.status = status;
 	}
@@ -48,7 +56,7 @@ public class Device implements Serializable {
 	private long id;
 
 	@Column
-	private int temprature ;
+	private int temperature;
 
 	@Column(unique = true, length = 7, nullable = false)
 	private String pinCode;
@@ -70,12 +78,12 @@ public class Device implements Serializable {
 		this.id = id;
 	}
 
-	public int getTemprature() {
-		return temprature;
+	public int getTemperature() {
+		return temperature;
 	}
 
-	public void setTemprature(int temprature) {
-		this.temprature = temprature;
+	public void setTemperature(int temperature) {
+		this.temperature = temperature;
 	}
 
 	public int getStatusId() {
