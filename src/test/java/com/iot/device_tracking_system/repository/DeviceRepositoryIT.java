@@ -10,9 +10,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.iot.device_tracking_system.entity.Device;
+import org.springframework.test.context.ActiveProfiles;
 
 @DataJpaTest()
-class DeviceRepositoryTest {
+@ActiveProfiles("it")
+class DeviceRepositoryIT {
 
 	@Autowired
 	private DeviceRepository deviceRepository;

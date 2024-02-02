@@ -10,7 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @RequestMapping(value = "/devices", produces = MediaType.APPLICATION_JSON_VALUE)
 public interface DeviceController {
@@ -19,16 +19,16 @@ public interface DeviceController {
     ResponseEntity<Response> createDevice(@Valid @RequestBody DeviceDto deviceDto) ;
 
     @PutMapping("/{id}")
-    ResponseEntity<Response> updateDevice(@Valid @RequestBody DeviceDto deviceDto, @PathVariable(name = "id") long id);
+    ResponseEntity<Response> updateDevice(@Valid @RequestBody DeviceDto deviceDto, @PathVariable long id);
 
     @DeleteMapping("/{id}")
-    ResponseEntity<Response>  deleteDevice(@PathVariable(name = "id") long id) ;
+    ResponseEntity<Response>  deleteDevice(@PathVariable long id) ;
 
     @DeleteMapping
     ResponseEntity<Response>  deleteAllDevices();
 
     @GetMapping("/{id}")
-    ResponseEntity<Response>  getDevice(@PathVariable(name = "id") long id);
+    ResponseEntity<Response>  getDevice(@PathVariable long id);
 
     @GetMapping()
     ResponseEntity<Response>  getAllDevices(
@@ -38,5 +38,5 @@ public interface DeviceController {
 
 
     @PutMapping("/{id}/configuration")
-    ResponseEntity<Response> configureDevice(@PathVariable(name = "id") long id) ;
+    ResponseEntity<Response> configureDevice(@PathVariable long id) ;
 }

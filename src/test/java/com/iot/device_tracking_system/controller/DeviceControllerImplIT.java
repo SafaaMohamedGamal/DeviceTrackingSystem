@@ -26,9 +26,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-@ActiveProfiles("dev")
+@ActiveProfiles("it")
 @AutoConfigureMockMvc
-class DeviceControllerImplTest {
+class DeviceControllerImplIT {
 
     @Autowired
     MockMvc mockMvc; // to perform request

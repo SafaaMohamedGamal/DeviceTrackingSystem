@@ -4,17 +4,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+import java.io.Serial;
 import java.io.Serializable;
 
 @Entity(name = "status")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Status implements Serializable, Cloneable {
+public class Status implements Serializable {
 
+	@Serial
 	private static final long serialVersionUID = -4448377296664511360L;
 	
 	public Status(int id, String name) {

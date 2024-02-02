@@ -1,19 +1,20 @@
 package com.iot.device_tracking_system.repository;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.iot.device_tracking_system.model.Status;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-import com.iot.device_tracking_system.model.Status;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataJpaTest()
-class StatusRepositoryTest {
+@ActiveProfiles("it")
+class StatusRepositoryIT {
 
 	@Autowired
 	private StatusRepository statusRepository;
@@ -24,9 +25,8 @@ class StatusRepositoryTest {
 
 	@Test
 	void findStatusByIdThatNotExist_shouldThrowNoSuchElementException() {
-		assertThrows(NoSuchElementException.class, ()->{
-				statusRepository.findById(3).get();
-				});
+		var statusOptional = statusRepository.findById(3);
+		assertThrows(NoSuchElementException.class, statusOptional::get);
 	}
 	
 	@Test

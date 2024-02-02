@@ -3,7 +3,7 @@ package com.iot.device_tracking_system.controller;
 import com.iot.device_tracking_system.model.DeviceDto;
 import com.iot.device_tracking_system.model.Response;
 import com.iot.device_tracking_system.service.DeviceService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -11,16 +11,18 @@ import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @Validated
 @RestController
 public class DeviceControllerImpl implements DeviceController {
 
-	@Autowired
-	private DeviceService deviceService;
+	private final DeviceService deviceService;
+	public DeviceControllerImpl(DeviceService deviceService){
+		this.deviceService = deviceService;
+	}
 
 	public ResponseEntity<Response> createDevice(@Valid @RequestBody DeviceDto deviceDto) {
 		Response response;
@@ -31,7 +33,7 @@ public class DeviceControllerImpl implements DeviceController {
 		return new ResponseEntity<>(response, status);
 	}
 
-	public ResponseEntity<Response> updateDevice(@Valid @RequestBody DeviceDto deviceDto, @PathVariable(name = "id") long id) {
+	public ResponseEntity<Response> updateDevice(@Valid @RequestBody DeviceDto deviceDto, @PathVariable long id) {
 		Response response;
 		HttpStatus status;
 
@@ -40,7 +42,7 @@ public class DeviceControllerImpl implements DeviceController {
 		return new ResponseEntity<>(response, status);
 	}
 
-	public ResponseEntity<Response>  deleteDevice(@PathVariable(name = "id") long id) {
+	public ResponseEntity<Response>  deleteDevice(@PathVariable long id) {
 		Response response;
 		HttpStatus status;
 
@@ -60,7 +62,7 @@ public class DeviceControllerImpl implements DeviceController {
 		return new ResponseEntity<>(response, status);
 	}
 
-	public ResponseEntity<Response>  getDevice(@PathVariable(name = "id") long id) {
+	public ResponseEntity<Response>  getDevice(@PathVariable long id) {
 		Response response;
 		HttpStatus status;
 
@@ -70,7 +72,7 @@ public class DeviceControllerImpl implements DeviceController {
 	}
 
 	public ResponseEntity<Response>  getAllDevices(
-  	      @PageableDefault(page = 0, size = 5)
+  	      @PageableDefault(size = 5)
   	      @SortDefault(sort = "id", direction = Sort.Direction.ASC)
   	       Pageable pageable) {
 		Response response;
@@ -82,7 +84,7 @@ public class DeviceControllerImpl implements DeviceController {
 	}
 	
 
-	public ResponseEntity<Response> configureDevice(@PathVariable(name = "id") long id) {
+	public ResponseEntity<Response> configureDevice(@PathVariable long id) {
 		Response response;
 		HttpStatus status;
 			response = new Response(true, "Device configured", deviceService.configureDevice(id));

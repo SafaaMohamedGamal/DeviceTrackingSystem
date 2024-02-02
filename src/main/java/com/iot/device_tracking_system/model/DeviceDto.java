@@ -1,6 +1,6 @@
 package com.iot.device_tracking_system.model;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
